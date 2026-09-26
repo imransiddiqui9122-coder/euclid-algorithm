@@ -86,8 +86,8 @@ button {
 }
 
 button:hover {
-    colour: black;
-    background: white;
+    
+    background:  #1d4ed8;
 }
 
 /* Result area */
