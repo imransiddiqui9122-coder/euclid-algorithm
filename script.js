@@ -3,27 +3,30 @@ function calculate() {
     let b = Number(document.getElementById("b").value);
     let result = document.getElementById("result");
 
-    // Check if A or B is empty
     if (document.getElementById("a").value === "" ||
         document.getElementById("b").value === "") {
-
         result.innerHTML = "<p class='error'>⚠️ Please enter both A and B.</p>";
         return;
     }
 
-    // B cannot be zero
     if (b === 0) {
         result.innerHTML = "<p class='error'>⚠️ B cannot be 0.</p>";
         return;
     }
 
-    // B cannot be negative
     if (b < 0) {
         result.innerHTML = "<p class='error'>⚠️ B must be a positive number.</p>";
         return;
     }
 
-    let steps = "<h3>A = BQ + R</h3>";
+    let originalA = a;
+    let originalB = b;
+
+    let operation =
+        document.querySelector('input[name="operation"]:checked').value;
+
+    // HCF process
+    let steps = "";
 
     while (b !== 0) {
         let q = Math.floor(a / b);
@@ -35,10 +38,63 @@ function calculate() {
         b = r;
     }
 
-    steps += "<br><b>∴ HCF = " + a + "</b>";
+    let hcf = a;
 
-    result.innerHTML = steps;
+    let lcm = (originalA * originalB) / hcf;
+
+   // HCF only
+if (operation === "hcf") {
+    result.innerHTML =
+        "<h3>A = BQ + R</h3>" +
+        steps +
+        "<br><b>∴ HCF = " + hcf + "</b>";
 }
+
+// LCM only
+if (operation === "lcm") {
+    result.innerHTML =
+        "<h3>LCM = A × B / HCF</h3>" +
+        "<b>LCM = " + originalA + " × " + originalB + " / " + hcf + "</b>" +
+        "<br>" +
+        "<b>LCM = " + lcm + "</b>";
+}
+
+// HCF + LCM
+if (operation === "both") {
+    result.innerHTML =
+        "<h3>A = BQ + R</h3>" +
+        steps +
+        "<br><b>∴ HCF = " + hcf + "</b>" +
+        "<br><br>" +
+        "<h3>LCM = A × B / HCF</h3>" +
+        "<b>LCM = " + originalA + " × " + originalB + " / " + hcf + "</b>" +
+        "<br>" +
+        "<b>∴ LCM = " + lcm + "</b>";
+}
+}
+
+
+// Button text change
+document.querySelectorAll('input[name="operation"]').forEach(function(radio) {
+
+    radio.addEventListener("change", function() {
+
+        let button = document.getElementById("calculateBtn");
+
+        if (this.value === "hcf") {
+            button.textContent = "Calculate HCF";
+        }
+
+        if (this.value === "lcm") {
+            button.textContent = "Calculate LCM";
+        }
+
+        if (this.value === "both") {
+            button.textContent = "Calculate HCF + LCM";
+        }
+    });
+
+});
 
 
 // Clear button
@@ -46,4 +102,8 @@ function clearApp() {
     document.getElementById("a").value = "";
     document.getElementById("b").value = "";
     document.getElementById("result").innerHTML = "";
+
+    document.querySelector('input[value="hcf"]').checked = true;
+
+    document.getElementById("calculateBtn").textContent = "Calculate HCF";
 }
