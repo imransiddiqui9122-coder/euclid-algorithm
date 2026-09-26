@@ -2,17 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Class 10 ke liye free Euclid Division Algorithm calculator. Euclid Vibhajan vidhi se HCF calculate karein aur A = BQ + R ke steps dekhein.">
-
-    <title>Euclid Algorithm Calculator | Euclid Vibhajan | Class 10</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euclid's Algorithm</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="container">
@@ -26,13 +20,29 @@
             <input id="a" type="number" placeholder="Enter value of A">
 
             <input id="b" type="number" placeholder="Enter value of B">
+                 <div class="choice">
+    <label>
+        <input type="radio" name="operation" value="hcf" checked>
+        HCF
+    </label>
 
-            <div class="buttons">
-                   <button onclick="calculate()">Calculate HCF</button>
-                   <button onclick="clearApp()" class="clear-btn">Clear</button>
-            </div>
+    <label>
+        <input type="radio" name="operation" value="lcm">
+        LCM
+    </label>
 
-          <div id="result"></div>
+    <label>
+        <input type="radio" name="operation" value="both">
+        HCF + LCM
+    </label>
+</div>
+
+<div class="buttons">
+    <button id="calculateBtn" onclick="calculate()">Calculate HCF</button>
+    <button onclick="clearApp()" class="clear-btn">Clear</button>
+</div>
+
+<div id="result"></div>
 
         </div>
 
